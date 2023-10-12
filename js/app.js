@@ -30,6 +30,7 @@ const giftUpdate = (e) => {
   datos[index].precio = document.querySelector("#precioModal").value;
   datos[index].imagen = document.querySelector("#imagenModal").value;
 
+  guardarEnLocalStorage();
   cargarTabla();
   myModal.hide();
 };
@@ -67,6 +68,7 @@ const agregarGift = (event) => {
   let imagen = document.querySelector("#imagen").value;
 
   datos.push(new Gift(id, gift, tipo, tiempo, precio, imagen));
+  guardarEnLocalStorage();
   document.querySelector("#formGift").reset();
   cargarTabla();
 };
@@ -80,6 +82,7 @@ window.borrarGift = (id) => {
 
   if (validar) {
     datos.splice(index, 1);
+    guardarEnLocalStorage();
     cargarTabla();
   }
 };
