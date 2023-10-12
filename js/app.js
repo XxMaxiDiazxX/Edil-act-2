@@ -1,15 +1,7 @@
-export class Gift {
-  constructor(id, gift, tipo, tiempo, precio, imagen) {
-    this.id = id;
-    this.gift = gift;
-    this.tipo = tipo;
-    this.tiempo = tiempo;
-    this.precio = precio;
-    this.imagen = imagen;
-  }
-}
+import datosJson from "../data/data.json" assert { type: "json" };
+import { Gift } from "./clases.js";
 
-let datos = JSON.parse(localStorage.getItem("giftData")) || [];
+let datos = JSON.parse(localStorage.getItem("giftData")) || datosJson;
 
 const cuerpoTabla = document.querySelector("#cuerpo-tabla");
 const myModal = new bootstrap.Modal(document.getElementById("modalGift"));
@@ -67,7 +59,7 @@ const cargarTabla = () => {
 const agregarGift = (event) => {
   event.preventDefault();
 
-  let id = datos.length > 0 ? datos[datos.length - 1].id + 1 : 1; 
+  let id = datos.length > 0 ? datos[datos.length - 1].id + 1 : 1;
   let gift = document.querySelector("#gift").value;
   let tipo = document.querySelector("#tipo").value;
   let tiempo = document.querySelector("#tiempo").value;
@@ -75,7 +67,6 @@ const agregarGift = (event) => {
   let imagen = document.querySelector("#imagen").value;
 
   datos.push(new Gift(id, gift, tipo, tiempo, precio, imagen));
-  guardarEnLocalStorage(); 
   document.querySelector("#formGift").reset();
   cargarTabla();
 };
@@ -93,9 +84,7 @@ window.borrarGift = (id) => {
   }
 };
 
-const guardarEnLocalStorage = () => {
-  localStorage.setItem("giftData", JSON.stringify(datos));
-};
+
 
 cargarTabla();
 
